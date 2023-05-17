@@ -45,7 +45,6 @@ else:
     learn = load_learner(model_path)
 age_list = []
 estimated_age = None
-placeholder = st.empty()
 class AgeDetector:
     def recv(self, frame):
         # Convert the frame to grayscale for face detection
@@ -53,8 +52,14 @@ class AgeDetector:
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         # Perform face detection using the Haar Cascade Classifier
         faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
-        estimated_age = int(np.mean(age_list))
-        with placeholder.container():
+        # Calculate the estimated age based on the age list
+        if len(age_list) > 0:
+            estimated_age = int(np.mean(age_list))
+        else:
+            estimated_age = None
+        
+        # Update the estimated age placeholder
+        with st.empty():
             st.write("Age (Estimate):", estimated_age)
             
         # Iterate over the detected faces
