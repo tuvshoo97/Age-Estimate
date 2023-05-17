@@ -80,7 +80,7 @@ class AgeDetector:
 def main():
     #st.set_page_config(page_title="Age Detection", layout="wide")
 
-    st.markdown("""# Real-Time Age Prediction with Webcam Access
+    st.title("""# Real-Time Age Prediction with Webcam Access
 
     Using this app, you can predict the age of a person in real-time by accessing your webcam. Impress your friends with this cutting-edge deep learning technology!
 
