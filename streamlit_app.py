@@ -43,7 +43,7 @@ if not os.path.isfile(model_path):
     learn = load_learner(model_path)
 else:
     learn = load_learner(model_path)
-#age_list = []
+age_list = []
 placeholder = st.empty()
 class AgeDetector:
     def recv(self, frame):
