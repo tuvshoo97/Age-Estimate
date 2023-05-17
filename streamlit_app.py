@@ -88,5 +88,6 @@ def main():
                                  video_processor_factory=AgeDetector)
     try :
         st.write("Age (Estimate):", estimated_age)
+    except: continue
 if __name__ == "__main__":
     main()
