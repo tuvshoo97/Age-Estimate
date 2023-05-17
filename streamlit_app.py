@@ -43,8 +43,8 @@ if not os.path.isfile(model_path):
     learn = load_learner(model_path)
 else:
     learn = load_learner(model_path)
-age_list = []
-placeholder = st.empty()
+#age_list = []
+#placeholder = st.empty()
 class AgeDetector:
     def recv(self, frame):
         # Convert the frame to grayscale for face detection
@@ -60,7 +60,7 @@ class AgeDetector:
             # Perform age detection on the cropped face image using your custom age detection algorithm
             try :
                 age = learn.predict(cropped_face)[0][0]
-                age_list.append(age)
+                #age_list.append(age)
                 
             except:
                 continue
@@ -71,11 +71,11 @@ class AgeDetector:
             # Display the predicted age on the frame
             age_text = "Age: {}".format(round(age, 0))
             cv2.putText(img, age_text, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
-            estimated_age = int(np.mean(age_list))
-            with placeholder.container():
-                try :
-                    st.write("Age (Estimate):", estimated_age)
-                except: continue
+            #estimated_age = int(np.mean(age_list))
+            #with placeholder.container():
+             #   try :
+              #      st.write("Age (Estimate):", estimated_age)
+               # except: continue
                 
 
         return av.VideoFrame.from_ndarray(img, format='bgr24')
