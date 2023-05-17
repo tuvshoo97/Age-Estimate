@@ -53,7 +53,11 @@ class AgeDetector:
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         # Perform face detection using the Haar Cascade Classifier
         faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+        estimated_age = int(np.mean(age_list))
+        with st.spinner("Estimated age: ", estimated_age):
+            
         # Iterate over the detected faces
+        
         for (x, y, w, h) in faces:
             # Extract the region of interest (ROI) or the cropped face image
             cropped_face = img[y:y + h, x:x + w]
@@ -72,10 +76,11 @@ class AgeDetector:
             # Display the predicted age on the frame
             age_text = "Age: {}".format(round(age, 0))
             cv2.putText(img, age_text, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
-            estimated_age = int(np.mean(age_list))
+           
+            
                 
 
-        return av.VideoFrame.from_ndarray(img, format='bgr24'), estimated_age
+        return av.VideoFrame.from_ndarray(img, format='bgr24')
 
 def main():
     #st.set_page_config(page_title="Age Detection", layout="wide")
