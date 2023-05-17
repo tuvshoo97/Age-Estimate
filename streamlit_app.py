@@ -59,8 +59,8 @@ class AgeDetector:
             estimated_age = None
         
         # Update the estimated age placeholder
-        with st.empty():
-            st.write("Age (Estimate):", estimated_age)
+        
+        self.placeholder.text("Age (Estimate): {}".format(estimated_age))
             
         # Iterate over the detected faces
         
