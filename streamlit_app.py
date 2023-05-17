@@ -86,7 +86,8 @@ def main():
     # Configure the Streamlit WebRTC component
     webrtc_ctx = webrtc_streamer(key="key",rtc_configuration={"iceServers": token.ice_servers},
                                  video_processor_factory=AgeDetector)
-    st.write("Age (Estimate):", estimated_age)
+    try :
+        st.write("Age (Estimate):", estimated_age)
 
 if __name__ == "__main__":
     main()
