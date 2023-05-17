@@ -43,7 +43,8 @@ if not os.path.isfile(model_path):
     learn = load_learner(model_path)
 else:
     learn = load_learner(model_path)
-age_list = []    
+age_list = []
+placeholder = st.empty()
 class AgeDetector:
     def recv(self, frame):
         # Convert the frame to grayscale for face detection
@@ -71,6 +72,11 @@ class AgeDetector:
             age_text = "Age: {}".format(round(age, 0))
             cv2.putText(img, age_text, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
             estimated_age = int(np.mean(age_list))
+            with placeholder.container():
+                try :
+                    st.write("Age (Estimate):", estimated_age)
+                except: continue
+                
 
         return av.VideoFrame.from_ndarray(img, format='bgr24')
 
@@ -86,8 +92,6 @@ def main():
     # Configure the Streamlit WebRTC component
     webrtc_ctx = webrtc_streamer(key="key",rtc_configuration={"iceServers": token.ice_servers},
                                  video_processor_factory=AgeDetector)
-    try :
-        st.write("Age (Estimate):", estimated_age)
-    except: continue
+    
 if __name__ == "__main__":
     main()
