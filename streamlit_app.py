@@ -54,7 +54,8 @@ class AgeDetector:
         # Perform face detection using the Haar Cascade Classifier
         faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
         estimated_age = int(np.mean(age_list))
-        with st.spinner("Estimated age: ", estimated_age):
+        with placeholder.container():
+            st.write("Age (Estimate):", estimated_age)
             
         # Iterate over the detected faces
         
@@ -94,8 +95,7 @@ def main():
     # Configure the Streamlit WebRTC component
     webrtc_ctx = webrtc_streamer(key="key",rtc_configuration={"iceServers": token.ice_servers},
                                  video_processor_factory=AgeDetector)
-    with placeholder.container():
-        st.write("Age (Estimate):", estimated_age)
+    
     
 if __name__ == "__main__":
     main()
