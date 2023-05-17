@@ -44,7 +44,7 @@ if not os.path.isfile(model_path):
 else:
     learn = load_learner(model_path)
 #age_list = []
-#placeholder = st.empty()
+placeholder = st.empty()
 class AgeDetector:
     def recv(self, frame):
         # Convert the frame to grayscale for face detection
