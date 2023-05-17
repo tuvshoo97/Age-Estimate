@@ -47,6 +47,8 @@ age_list = []
 estimated_age = None
 class AgeDetector:
     def recv(self, frame):
+        global age_list
+        global estimated_age
         # Convert the frame to grayscale for face detection
         img = frame.to_ndarray(format="bgr24")
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -57,10 +59,11 @@ class AgeDetector:
             estimated_age = int(np.mean(age_list))
         else:
             estimated_age = None
+
+        self.placeholder.text("Age (Estimate): {}".format(estimated_age))
         
         # Update the estimated age placeholder
         
-        self.placeholder.text("Age (Estimate): {}".format(estimated_age))
             
         # Iterate over the detected faces
         
